@@ -1,4 +1,4 @@
 # testingVilniusJurga
 
 
-My first test cecking, that everything is working.
+My first test checking, that everything is working.
