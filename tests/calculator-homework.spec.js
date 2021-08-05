@@ -1,6 +1,6 @@
 const { test, expect } = require('@playwright/test');
-/*const { BasicCalculatorPage } = require('../pages-Calculator/basicCalculatorPage.js');
-const { CalculatorResultPage } = require('../pages-Calculator/calculatorResultPage');
+/*const { BasicCalculatorPage } = require('../pages-Calculator/basicCalculatorPage');
+
 
 test.describe('', () => {
     let page;
@@ -8,11 +8,13 @@ test.describe('', () => {
     test.beforeAll(async ({ browser }) => {
       page = await browser.newPage();
       startPage = new BasicCalculatorPage(page);
-      resultsPage = new CalculatorResultPage(page);
-    
-    });*/
 
-    
+        });
+   test.beforeEach(async () => {
+      await startPage.goto();
+    });
+  });*/
+       
  
 test('Testing page to be opened', async ({ page }) => {
   await page.goto('https://testsheepnz.github.io/BasicCalculator');
@@ -35,12 +37,13 @@ test('Check that calculator is working', async ({ page }) => {
     test('Check that calculator adds numbers', async ({ page }) => {
       await page.goto('https://testsheepnz.github.io/BasicCalculator');
       await page.waitForSelector('#page-top');
-      await page.selectOption('#selectBuild','0');
+      await page.selectOption('#selectBuild', '0');
       await page.fill('#number1Field', '5');
       await page.fill('#number2Field', '3');
+      await page.selectOption('#selectOperationDropdown', '0');
       await page.click('#calculateButton');
       const result1Content = await page.textContent('#numberAnswerField');
-      expect(result1Content).toBe(true);
+      expect(result1Content).toContain('8');
      
     });
       
@@ -55,8 +58,8 @@ test('Check that calculator is working', async ({ page }) => {
   await page.fill('#number1Field', ('' + inputLengths));
   await page.fill('#number2Field', ('' + inputLengths));
   await page.click('#calculateButton');
-  const result2Content = await page.isVisible('#numberAnswerField');
-  expect(result2Content).toBe(true);
+  const result3Content = await page.isVisible('#numberAnswerField');
+  expect(result3Content).toBe(true);
  
 });
 });
