@@ -30,17 +30,18 @@ test('Check that calculator is working', async ({ page }) => {
   await page.fill('#number2Field', '3');
   await page.click('#calculateButton');
   const result2Content = await page.isVisible('#numberAnswerField');
-  expect(result2Content).toBe(true);
+  expect(result2Content).toContainEqual('8');
   
     });
 
     test('Check that calculator adds numbers', async ({ page }) => {
       await page.goto('https://testsheepnz.github.io/BasicCalculator');
       await page.waitForSelector('#page-top');
-      await page.selectOption('#selectBuild', '0');
+      await page.selectOption('select#selectBuild', '0');
       await page.fill('#number1Field', '5');
       await page.fill('#number2Field', '3');
-      await page.selectOption('#selectOperationDropdown', '0');
+      await page.click('#selectOperationDropdown');
+      await page.selectOption('select#selectOperationDropdown','Add');
       await page.click('#calculateButton');
       const result1Content = await page.textContent('#numberAnswerField');
       expect(result1Content).toContain('8');
